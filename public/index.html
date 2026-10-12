@@ -420,11 +420,14 @@
   const log = $("log"), main = $("main"), form = $("form"), input = $("input"), send = $("send");
   const statusDot = $("statusDot"), convList = $("convList"), sidebar = $("sidebar"), backdrop = $("backdrop");
 
+  // Start-screen buttons: questions about Kazuma, answered from profile.md
   const SUGGESTIONS = [
-    "What time is it?",
-    "Who built you?",
-    "Explain what an AI agent is",
-    "Write a tiny JavaScript function that reverses a string",
+    "Who is Algimantas?",
+    "What is he studying?",
+    "What's his tech stack?",
+    "Is he open to work?",
+    "How can I contact him?",
+    "How does this agent work?",
   ];
 
   let currentId = null;      // conversation being shown
@@ -459,7 +462,7 @@
       <section class="intro" id="intro">
         <p class="eyebrow">&gt; ${eyebrow}</p>
         <h1 class="glitch" data-text="ASK ME ANYTHING">ASK ME ANYTHING</h1>
-        <p class="intro-sub">A personal AI assistant built by Kazuma, running on a local model with its own tools and memory.</p>
+        <p class="intro-sub">A personal AI assistant built by Kazuma, running on a local model on his own Mac. Ask about him, his work and this project, or anything else.</p>
         <div class="chips"></div>
       </section>`;
     const chips = log.querySelector(".chips");

@@ -59,6 +59,7 @@ const CANNED = {
 };
 
 const PUBLIC_DIR = path.resolve("public");
+const PROFILE_FILE = path.resolve("profile.md"); // public facts about you, shown to everyone
 const STATIC = {
   "/": ["public/index.html", "text/html; charset=utf-8"],
   "/index.html": ["public/index.html", "text/html; charset=utf-8"],
@@ -156,6 +157,20 @@ function systemPrompt(user, userTools) {
     .map((t) => `- ${t.function.name}: ${t.function.description}`)
     .join("\n");
 
+  // Public profile (profile.md): read on every message, so edits apply immediately
+  let profile = fs.existsSync(PROFILE_FILE) ? fs.readFileSync(PROFILE_FILE, "utf8") : "";
+  if (profile.includes("\n## ")) profile = profile.slice(profile.indexOf("\n## ") + 1); // skip the title + note
+  profile = profile.trim();
+  const profileSection = profile
+    ? [
+        "",
+        "PUBLIC PROFILE of your creator (from his website). Use it to answer questions about him, his skills,",
+        "studies, work status, contact details and this agent. If something isn't covered here, say you don't",
+        "know and point to https://vezevicius.lt. Never invent details about him.",
+        profile,
+      ]
+    : [];
+
   const common = [
     "Never say you can't do something a tool can do. Call the tool instead.",
     "Always call get_current_time for questions about the date or time; never guess.",
@@ -174,8 +189,9 @@ function systemPrompt(user, userTools) {
       "You are Kazuma's personal AI assistant, running locally on his Mac.",
       `You are talking to a guest (${user.email}), one of his friends, not Kazuma himself.`,
       "Be friendly and concise. You can chat and answer questions.",
-      "You have no access to Kazuma's notes or private information; never invent any.",
+      "Beyond the public profile below, you have no access to Kazuma's notes or private information.",
       ...common,
+      ...profileSection,
     ].join("\n");
   }
 
@@ -187,6 +203,7 @@ function systemPrompt(user, userTools) {
     "You CAN check the time, read and write notes, save memories and use every tool listed below.",
     "When the user tells you a lasting fact or preference, call `remember`.",
     ...common,
+    ...profileSection,
     "",
     "Things you know about the user, and instructions they gave you.",
     "Follow these instructions exactly:",
