@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# secrets: commit .env.example instead
+.env
+.env.*
+!.env.example
+
+# your data: chats, memory, notes, MCP workspace
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# local config and logs
+mcp.json
+logs/
+
+# macOS
+.DS_Store

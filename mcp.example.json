@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "files": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@1.0.0", "./data/workspace"],
+      "guest": false,
+      "confirm": ["write_file", "edit_file", "create_directory", "move_file"]
+    }
+  }
+}

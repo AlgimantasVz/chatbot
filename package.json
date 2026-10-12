@@ -1,0 +1,21 @@
+{
+  "name": "my-project",
+  "version": "0.4.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node agent.js",
+    "web": "node --env-file=.env server.js",
+    "check": "npm audit --omit=dev"
+  },
+  "engines": {
+    "node": ">=20.6"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "better-sqlite3": "^12.11.1",
+    "dompurify": "^3.4.16",
+    "jose": "^6.2.12",
+    "marked": "^18.1.0"
+  }
+}
